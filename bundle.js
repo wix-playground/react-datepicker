@@ -480,7 +480,7 @@
 
 /***/ },
 /* 6 */
-[505, 7],
+[506, 7],
 /* 7 */
 /***/ function(module, exports) {
 
@@ -5494,7 +5494,7 @@
 
 /***/ },
 /* 47 */
-[505, 32],
+[506, 32],
 /* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -19808,7 +19808,7 @@
 
 	var _example_components2 = _interopRequireDefault(_example_components);
 
-	var _hero_example = __webpack_require__(504);
+	var _hero_example = __webpack_require__(505);
 
 	var _hero_example2 = _interopRequireDefault(_hero_example);
 
@@ -19946,141 +19946,145 @@
 
 	var _code_example_component2 = _interopRequireDefault(_code_example_component);
 
-	var _custom_date_format = __webpack_require__(469);
+	var _disable_date_auto_correction = __webpack_require__(469);
+
+	var _disable_date_auto_correction2 = _interopRequireDefault(_disable_date_auto_correction);
+
+	var _custom_date_format = __webpack_require__(470);
 
 	var _custom_date_format2 = _interopRequireDefault(_custom_date_format);
 
-	var _custom_class_name = __webpack_require__(470);
+	var _custom_class_name = __webpack_require__(471);
 
 	var _custom_class_name2 = _interopRequireDefault(_custom_class_name);
 
-	var _custom_calendar_class_name = __webpack_require__(471);
+	var _custom_calendar_class_name = __webpack_require__(472);
 
 	var _custom_calendar_class_name2 = _interopRequireDefault(_custom_calendar_class_name);
 
-	var _placeholder_text = __webpack_require__(472);
+	var _placeholder_text = __webpack_require__(473);
 
 	var _placeholder_text2 = _interopRequireDefault(_placeholder_text);
 
-	var _specific_date_range = __webpack_require__(473);
+	var _specific_date_range = __webpack_require__(474);
 
 	var _specific_date_range2 = _interopRequireDefault(_specific_date_range);
 
-	var _locale = __webpack_require__(474);
+	var _locale = __webpack_require__(475);
 
 	var _locale2 = _interopRequireDefault(_locale);
 
-	var _exclude_dates = __webpack_require__(475);
+	var _exclude_dates = __webpack_require__(476);
 
 	var _exclude_dates2 = _interopRequireDefault(_exclude_dates);
 
-	var _highlight_dates = __webpack_require__(476);
+	var _highlight_dates = __webpack_require__(477);
 
 	var _highlight_dates2 = _interopRequireDefault(_highlight_dates);
 
-	var _include_dates = __webpack_require__(477);
+	var _include_dates = __webpack_require__(478);
 
 	var _include_dates2 = _interopRequireDefault(_include_dates);
 
-	var _filter_dates = __webpack_require__(478);
+	var _filter_dates = __webpack_require__(479);
 
 	var _filter_dates2 = _interopRequireDefault(_filter_dates);
 
-	var _disabled = __webpack_require__(479);
+	var _disabled = __webpack_require__(480);
 
 	var _disabled2 = _interopRequireDefault(_disabled);
 
-	var _disabled_keyboard_navigation = __webpack_require__(480);
+	var _disabled_keyboard_navigation = __webpack_require__(481);
 
 	var _disabled_keyboard_navigation2 = _interopRequireDefault(_disabled_keyboard_navigation);
 
-	var _clear_input = __webpack_require__(481);
+	var _clear_input = __webpack_require__(482);
 
 	var _clear_input2 = _interopRequireDefault(_clear_input);
 
-	var _on_blur_callbacks = __webpack_require__(482);
+	var _on_blur_callbacks = __webpack_require__(483);
 
 	var _on_blur_callbacks2 = _interopRequireDefault(_on_blur_callbacks);
 
-	var _placement = __webpack_require__(483);
+	var _placement = __webpack_require__(484);
 
 	var _placement2 = _interopRequireDefault(_placement);
 
-	var _date_range = __webpack_require__(484);
+	var _date_range = __webpack_require__(485);
 
 	var _date_range2 = _interopRequireDefault(_date_range);
 
-	var _tab_index = __webpack_require__(485);
+	var _tab_index = __webpack_require__(486);
 
 	var _tab_index2 = _interopRequireDefault(_tab_index);
 
-	var _year_dropdown = __webpack_require__(486);
+	var _year_dropdown = __webpack_require__(487);
 
 	var _year_dropdown2 = _interopRequireDefault(_year_dropdown);
 
-	var _month_dropdown = __webpack_require__(487);
+	var _month_dropdown = __webpack_require__(488);
 
 	var _month_dropdown2 = _interopRequireDefault(_month_dropdown);
 
-	var _year_select_dropdown = __webpack_require__(488);
+	var _year_select_dropdown = __webpack_require__(489);
 
 	var _year_select_dropdown2 = _interopRequireDefault(_year_select_dropdown);
 
-	var _today = __webpack_require__(489);
+	var _today = __webpack_require__(490);
 
 	var _today2 = _interopRequireDefault(_today);
 
-	var _timezone_date = __webpack_require__(490);
+	var _timezone_date = __webpack_require__(491);
 
 	var _timezone_date2 = _interopRequireDefault(_timezone_date);
 
-	var _inline = __webpack_require__(491);
+	var _inline = __webpack_require__(492);
 
 	var _inline2 = _interopRequireDefault(_inline);
 
-	var _open_to_date = __webpack_require__(492);
+	var _open_to_date = __webpack_require__(493);
 
 	var _open_to_date2 = _interopRequireDefault(_open_to_date);
 
-	var _fixed_calendar = __webpack_require__(493);
+	var _fixed_calendar = __webpack_require__(494);
 
 	var _fixed_calendar2 = _interopRequireDefault(_fixed_calendar);
 
-	var _week_numbers = __webpack_require__(494);
+	var _week_numbers = __webpack_require__(495);
 
 	var _week_numbers2 = _interopRequireDefault(_week_numbers);
 
-	var _custom_input = __webpack_require__(495);
+	var _custom_input = __webpack_require__(496);
 
 	var _custom_input2 = _interopRequireDefault(_custom_input);
 
-	var _multi_month = __webpack_require__(496);
+	var _multi_month = __webpack_require__(497);
 
 	var _multi_month2 = _interopRequireDefault(_multi_month);
 
-	var _multi_month_drp = __webpack_require__(497);
+	var _multi_month_drp = __webpack_require__(498);
 
 	var _multi_month_drp2 = _interopRequireDefault(_multi_month_drp);
 
-	var _children = __webpack_require__(498);
+	var _children = __webpack_require__(499);
 
 	var _children2 = _interopRequireDefault(_children);
 
-	var _portal = __webpack_require__(499);
+	var _portal = __webpack_require__(500);
 
 	var _portal2 = _interopRequireDefault(_portal);
 
-	var _inline_portal = __webpack_require__(500);
+	var _inline_portal = __webpack_require__(501);
 
 	var _inline_portal2 = _interopRequireDefault(_inline_portal);
 
-	var _raw_change = __webpack_require__(501);
+	var _raw_change = __webpack_require__(502);
 
 	var _raw_change2 = _interopRequireDefault(_raw_change);
 
-	__webpack_require__(502);
-
 	__webpack_require__(503);
+
+	__webpack_require__(504);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20194,6 +20198,9 @@
 	  }, {
 	    title: 'Get raw input value on change',
 	    component: _react2.default.createElement(_raw_change2.default, null)
+	  }, {
+	    title: 'Disable date auto correction',
+	    component: _react2.default.createElement(_disable_date_auto_correction2.default, null)
 	  }],
 
 	  renderExamples: function renderExamples() {
@@ -36843,6 +36850,7 @@
 	    dateFormat: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.array]),
 	    dateFormatCalendar: _react2.default.PropTypes.string,
 	    disabled: _react2.default.PropTypes.bool,
+	    disableDateAutoCorrection: _react2.default.PropTypes.bool,
 	    disabledKeyboardNavigation: _react2.default.PropTypes.bool,
 	    dropdownMode: _react2.default.PropTypes.oneOf(['scroll', 'select']).isRequired,
 	    endDate: _react2.default.PropTypes.object,
@@ -36861,6 +36869,8 @@
 	    name: _react2.default.PropTypes.string,
 	    onBlur: _react2.default.PropTypes.func,
 	    onChange: _react2.default.PropTypes.func.isRequired,
+	    onSelect: _react2.default.PropTypes.func,
+	    onClickOutside: _react2.default.PropTypes.func,
 	    onChangeRaw: _react2.default.PropTypes.func,
 	    onFocus: _react2.default.PropTypes.func,
 	    onMonthChange: _react2.default.PropTypes.func,
@@ -36896,10 +36906,13 @@
 	      onChange: function onChange() {},
 
 	      disabled: false,
+	      disableDateAutoCorrection: false,
 	      disabledKeyboardNavigation: false,
 	      dropdownMode: 'scroll',
 	      onFocus: function onFocus() {},
 	      onBlur: function onBlur() {},
+	      onSelect: function onSelect() {},
+	      onClickOutside: function onClickOutside() {},
 	      onMonthChange: function onMonthChange() {},
 
 	      popoverAttachment: 'top left',
@@ -36915,11 +36928,15 @@
 	    };
 	  },
 	  getInitialState: function getInitialState() {
-	    var defaultPreSelection = this.props.openToDate ? (0, _moment2.default)(this.props.openToDate) : (0, _moment2.default)();
+	    var defaultPreSelection = this.props.openToDate ? (0, _moment2.default)(this.props.openToDate) : this.props.selectsEnd && this.props.startDate ? (0, _moment2.default)(this.props.startDate) : this.props.selectsStart && this.props.endDate ? (0, _moment2.default)(this.props.endDate) : (0, _moment2.default)();
+	    var minDate = (0, _date_utils.getEffectiveMinDate)(this.props);
+	    var maxDate = (0, _date_utils.getEffectiveMaxDate)(this.props);
+	    var boundedPreSelection = minDate && defaultPreSelection.isBefore(minDate) ? minDate : maxDate && defaultPreSelection.isAfter(maxDate) ? maxDate : defaultPreSelection;
+
 	    return {
 	      open: false,
 	      preventFocus: false,
-	      preSelection: this.props.selected ? (0, _moment2.default)(this.props.selected) : defaultPreSelection
+	      preSelection: this.props.selected ? (0, _moment2.default)(this.props.selected) : boundedPreSelection
 	    };
 	  },
 	  componentWillUnmount: function componentWillUnmount() {
@@ -36969,6 +36986,7 @@
 	  },
 	  handleCalendarClickOutside: function handleCalendarClickOutside(event) {
 	    this.setOpen(false);
+	    this.props.onClickOutside(event);
 	    if (this.props.withPortal) {
 	      event.preventDefault();
 	    }
@@ -36994,7 +37012,7 @@
 	      return;
 	    }
 
-	    if (!(0, _date_utils.isSameDay)(this.props.selected, changedDate)) {
+	    if (!(0, _date_utils.isSameDay)(this.props.selected, changedDate) || this.props.disableDateAutoCorrection) {
 	      if (changedDate !== null) {
 	        if (this.props.selected) {
 	          changedDate = (0, _moment2.default)(changedDate).set({
@@ -37010,10 +37028,12 @@
 
 	      this.props.onChange(changedDate, event);
 	    }
+
+	    this.props.onSelect(changedDate, event);
 	  },
 	  setPreSelection: function setPreSelection(date) {
 	    var isDateRangePresent = typeof this.props.minDate !== 'undefined' && typeof this.props.maxDate !== 'undefined';
-	    var isValidDateSelection = isDateRangePresent ? (0, _date_utils.isDayInRange)(date, this.props.minDate, this.props.maxDate) : true;
+	    var isValidDateSelection = isDateRangePresent && date ? (0, _date_utils.isDayInRange)(date, this.props.minDate, this.props.maxDate) : true;
 	    if (isValidDateSelection) {
 	      this.setState({
 	        preSelection: date
@@ -37133,6 +37153,7 @@
 	    var className = (0, _classnames3.default)(this.props.className, _defineProperty({}, outsideClickIgnoreClass, this.state.open));
 	    return _react2.default.createElement(_date_input2.default, {
 	      ref: 'input',
+	      disableDateAutoCorrection: this.props.disableDateAutoCorrection,
 	      id: this.props.id,
 	      name: this.props.name,
 	      autoFocus: this.props.autoFocus,
@@ -37244,6 +37265,7 @@
 	    date: _react2.default.PropTypes.object,
 	    dateFormat: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.array]),
 	    disabled: _react2.default.PropTypes.bool,
+	    disableDateAutoCorrection: _react2.default.PropTypes.bool,
 	    excludeDates: _react2.default.PropTypes.array,
 	    filterDate: _react2.default.PropTypes.func,
 	    includeDates: _react2.default.PropTypes.array,
@@ -37258,7 +37280,8 @@
 
 	  getDefaultProps: function getDefaultProps() {
 	    return {
-	      dateFormat: 'L'
+	      dateFormat: 'L',
+	      disableDateAutoCorrection: false
 	    };
 	  },
 	  getInitialState: function getInitialState() {
@@ -37268,9 +37291,11 @@
 	  },
 	  componentWillReceiveProps: function componentWillReceiveProps(newProps) {
 	    if (!(0, _date_utils.isSameDay)(newProps.date, this.props.date) || !(0, _date_utils.isSameUtcOffset)(newProps.date, this.props.date) || newProps.locale !== this.props.locale || newProps.dateFormat !== this.props.dateFormat) {
-	      this.setState({
-	        value: this.safeDateFormat(newProps)
-	      });
+	      if (!this.props.disableDateAutoCorrection || newProps.date && newProps.date.isValid()) {
+	        this.setState({
+	          value: this.safeDateFormat(newProps)
+	        });
+	      }
 	    }
 	  },
 	  handleChange: function handleChange(event) {
@@ -37291,6 +37316,8 @@
 	        this.props.onChangeDate(date);
 	      } else if (value === '') {
 	        this.props.onChangeDate(null);
+	      } else if (this.props.disableDateAutoCorrection && !date.isValid()) {
+	        this.props.onChangeDate(null);
 	      }
 	    }
 	    this.setState({ value: value });
@@ -37299,9 +37326,12 @@
 	    return props.date && props.date.clone().locale(props.locale || _moment2.default.locale()).format(Array.isArray(props.dateFormat) ? props.dateFormat[0] : props.dateFormat) || '';
 	  },
 	  handleBlur: function handleBlur(event) {
-	    this.setState({
-	      value: this.safeDateFormat(this.props)
-	    });
+	    var val = this.safeDateFormat(this.props);
+	    if (!this.props.disableDateAutoCorrection || val !== '') {
+	      this.setState({
+	        value: val
+	      });
+	    }
 	    if (this.props.onBlur) {
 	      this.props.onBlur(event);
 	    }
@@ -37313,6 +37343,7 @@
 	    var _props = this.props,
 	        customInput = _props.customInput,
 	        date = _props.date,
+	        disableDateAutoCorrection = _props.disableDateAutoCorrection,
 	        locale = _props.locale,
 	        minDate = _props.minDate,
 	        maxDate = _props.maxDate,
@@ -37322,7 +37353,7 @@
 	        dateFormat = _props.dateFormat,
 	        onChangeDate = _props.onChangeDate,
 	        onChangeRaw = _props.onChangeRaw,
-	        rest = _objectWithoutProperties(_props, ['customInput', 'date', 'locale', 'minDate', 'maxDate', 'excludeDates', 'includeDates', 'filterDate', 'dateFormat', 'onChangeDate', 'onChangeRaw']); // eslint-disable-line no-unused-vars
+	        rest = _objectWithoutProperties(_props, ['customInput', 'date', 'disableDateAutoCorrection', 'locale', 'minDate', 'maxDate', 'excludeDates', 'includeDates', 'filterDate', 'dateFormat', 'onChangeDate', 'onChangeRaw']); // eslint-disable-line no-unused-vars
 
 	    if (customInput) {
 	      return _react2.default.cloneElement(customInput, _extends({}, rest, {
@@ -56030,6 +56061,81 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _moment = __webpack_require__(343);
+
+	var _moment2 = _interopRequireDefault(_moment);
+
+	var _reactDatepicker = __webpack_require__(341);
+
+	var _reactDatepicker2 = _interopRequireDefault(_reactDatepicker);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	  displayName: 'Disable Date Auto Correction',
+
+	  getInitialState: function getInitialState() {
+	    return {
+	      startDate: (0, _moment2.default)()
+	    };
+	  },
+	  handleChange: function handleChange(date) {
+	    this.setState({
+	      startDate: date
+	    });
+	  },
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'row' },
+	      _react2.default.createElement(
+	        'pre',
+	        { className: 'column example__code' },
+	        _react2.default.createElement(
+	          'code',
+	          { className: 'jsx' },
+	          '<DatePicker',
+	          _react2.default.createElement('br', null),
+	          '\xA0 \xA0 ',
+	          _react2.default.createElement(
+	            'strong',
+	            null,
+	            'disableDateAutoCorrection',
+	            _react2.default.createElement('br', null)
+	          ),
+	          '\xA0 \xA0 ',
+	          'selected={this.state.startDate}',
+	          _react2.default.createElement('br', null),
+	          '\xA0 \xA0 ',
+	          'onChange={this.handleChange} />'
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'column' },
+	        _react2.default.createElement(_reactDatepicker2.default, {
+	          disableDateAutoCorrection: true,
+	          selected: this.state.startDate,
+	          onChange: this.handleChange })
+	      )
+	    );
+	  }
+	});
+
+/***/ },
+/* 470 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
 	var _reactDatepicker = __webpack_require__(341);
 
 	var _reactDatepicker2 = _interopRequireDefault(_reactDatepicker);
@@ -56089,7 +56195,7 @@
 	});
 
 /***/ },
-/* 470 */
+/* 471 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56158,7 +56264,7 @@
 	});
 
 /***/ },
-/* 471 */
+/* 472 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56227,7 +56333,7 @@
 	});
 
 /***/ },
-/* 472 */
+/* 473 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56272,7 +56378,7 @@
 	});
 
 /***/ },
-/* 473 */
+/* 474 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56355,7 +56461,7 @@
 	});
 
 /***/ },
-/* 474 */
+/* 475 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56427,7 +56533,7 @@
 	});
 
 /***/ },
-/* 475 */
+/* 476 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56503,7 +56609,7 @@
 	});
 
 /***/ },
-/* 476 */
+/* 477 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56579,7 +56685,7 @@
 	});
 
 /***/ },
-/* 477 */
+/* 478 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56655,7 +56761,7 @@
 	});
 
 /***/ },
-/* 478 */
+/* 479 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56731,7 +56837,7 @@
 	});
 
 /***/ },
-/* 479 */
+/* 480 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56804,7 +56910,7 @@
 	});
 
 /***/ },
-/* 480 */
+/* 481 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56879,7 +56985,7 @@
 	});
 
 /***/ },
-/* 481 */
+/* 482 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56950,7 +57056,7 @@
 	});
 
 /***/ },
-/* 482 */
+/* 483 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57056,7 +57162,7 @@
 	});
 
 /***/ },
-/* 483 */
+/* 484 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57130,7 +57236,7 @@
 	});
 
 /***/ },
-/* 484 */
+/* 485 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57232,7 +57338,7 @@
 	module.exports = DateRange;
 
 /***/ },
-/* 485 */
+/* 486 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57300,7 +57406,7 @@
 	});
 
 /***/ },
-/* 486 */
+/* 487 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57377,7 +57483,7 @@
 	});
 
 /***/ },
-/* 487 */
+/* 488 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57446,7 +57552,7 @@
 	});
 
 /***/ },
-/* 488 */
+/* 489 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57528,7 +57634,7 @@
 	});
 
 /***/ },
-/* 489 */
+/* 490 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57596,7 +57702,7 @@
 	});
 
 /***/ },
-/* 490 */
+/* 491 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57745,7 +57851,7 @@
 	});
 
 /***/ },
-/* 491 */
+/* 492 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57813,7 +57919,7 @@
 	});
 
 /***/ },
-/* 492 */
+/* 493 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57881,7 +57987,7 @@
 	});
 
 /***/ },
-/* 493 */
+/* 494 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57945,7 +58051,7 @@
 	});
 
 /***/ },
-/* 494 */
+/* 495 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58013,7 +58119,7 @@
 	});
 
 /***/ },
-/* 495 */
+/* 496 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58141,7 +58247,7 @@
 	});
 
 /***/ },
-/* 496 */
+/* 497 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58209,7 +58315,7 @@
 	});
 
 /***/ },
-/* 497 */
+/* 498 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58280,7 +58386,7 @@
 	});
 
 /***/ },
-/* 498 */
+/* 499 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58349,7 +58455,7 @@
 	});
 
 /***/ },
-/* 499 */
+/* 500 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58417,7 +58523,7 @@
 	});
 
 /***/ },
-/* 500 */
+/* 501 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58537,7 +58643,7 @@
 	});
 
 /***/ },
-/* 501 */
+/* 502 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58633,15 +58739,15 @@
 	});
 
 /***/ },
-/* 502 */
+/* 503 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 503 */
-502,
 /* 504 */
+503,
+/* 505 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -58686,7 +58792,7 @@
 	});
 
 /***/ },
-/* 505 */
+/* 506 */
 /***/ function(module, exports, __webpack_require__, __webpack_module_template_argument_0__) {
 
 	/**
