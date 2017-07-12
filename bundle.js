@@ -38679,7 +38679,7 @@
 	    var _this = _possibleConstructorReturn(this, (DatePicker.__proto__ || Object.getPrototypeOf(DatePicker)).call(this, props));
 
 	    _this.calcInitialState = function () {
-	      var defaultPreSelection = _this.props.openToDate ? (0, _moment2.default)(_this.props.openToDate) : _this.props.selectsEnd && _this.props.startDate ? (0, _moment2.default)(_this.props.startDate) : _this.props.selectsStart && _this.props.endDate ? (0, _moment2.default)(_this.props.endDate) : (0, _moment2.default)();
+	      var defaultPreSelection = _this.props.openToDate ? (0, _moment2.default)(_this.props.openToDate) : _this.props.selectsEnd && _this.props.startDate ? (0, _moment2.default)(_this.props.startDate) : _this.props.selectsStart && _this.props.endDate ? (0, _moment2.default)(_this.props.endDate) : _this.props.utcOffset ? _moment2.default.utc().utcOffset(_this.props.utcOffset) : (0, _moment2.default)();
 	      var minDate = (0, _date_utils.getEffectiveMinDate)(_this.props);
 	      var maxDate = (0, _date_utils.getEffectiveMaxDate)(_this.props);
 	      var boundedPreSelection = minDate && defaultPreSelection.isBefore(minDate) ? minDate : maxDate && defaultPreSelection.isAfter(maxDate) ? maxDate : defaultPreSelection;
@@ -38722,7 +38722,7 @@
 
 	    _this.deferFocusInput = function () {
 	      _this.cancelFocusInput();
-	      _this.inputFocusTimeout = window.setTimeout(function () {
+	      _this.inputFocusTimeout = setTimeout(function () {
 	        return _this.setFocus();
 	      }, 1);
 	    };
@@ -38771,7 +38771,9 @@
 	        return _this.preventFocusTimeout;
 	      });
 	      _this.setSelected(date, event);
-	      _this.setOpen(false);
+	      if (!_this.props.inline) {
+	        _this.setOpen(false);
+	      }
 	    };
 
 	    _this.setSelected = function (date, event, keepInput) {
@@ -38893,6 +38895,7 @@
 	          ref: 'calendar',
 	          locale: _this.props.locale,
 	          dateFormat: _this.props.dateFormatCalendar,
+	          useWeekdaysShort: _this.props.useWeekdaysShort,
 	          dropdownMode: _this.props.dropdownMode,
 	          selected: _this.props.selected,
 	          preSelection: _this.state.preSelection,
@@ -38907,6 +38910,7 @@
 	          excludeDates: _this.props.excludeDates,
 	          filterDate: _this.props.filterDate,
 	          onClickOutside: _this.handleCalendarClickOutside,
+	          formatWeekNumber: _this.props.formatWeekNumber,
 	          highlightDates: _this.props.highlightDates,
 	          includeDates: _this.props.includeDates,
 	          inline: _this.props.inline,
@@ -38917,6 +38921,7 @@
 	          forceShowMonthNavigation: _this.props.forceShowMonthNavigation,
 	          scrollableYearDropdown: _this.props.scrollableYearDropdown,
 	          todayButton: _this.props.todayButton,
+	          weekLabel: _this.props.weekLabel,
 	          utcOffset: _this.props.utcOffset,
 	          outsideClickIgnoreClass: outsideClickIgnoreClass,
 	          fixedHeight: _this.props.fixedHeight,
@@ -38924,7 +38929,8 @@
 	          onDropdownFocus: _this.handleDropdownFocus,
 	          onMonthChange: _this.props.onMonthChange,
 	          dayClassName: _this.props.dayClassName,
-	          className: _this.props.calendarClassName },
+	          className: _this.props.calendarClassName,
+	          yearDropdownItemNumber: _this.props.yearDropdownItemNumber },
 	        _this.props.children
 	      );
 	    };
@@ -39038,6 +39044,7 @@
 	  excludeDates: _propTypes2.default.array,
 	  filterDate: _propTypes2.default.func,
 	  fixedHeight: _propTypes2.default.bool,
+	  formatWeekNumber: _propTypes2.default.func,
 	  highlightDates: _propTypes2.default.array,
 	  id: _propTypes2.default.string,
 	  includeDates: _propTypes2.default.array,
@@ -39075,9 +39082,12 @@
 	  tabIndex: _propTypes2.default.number,
 	  title: _propTypes2.default.string,
 	  todayButton: _propTypes2.default.string,
+	  useWeekdaysShort: _propTypes2.default.bool,
 	  utcOffset: _propTypes2.default.number,
 	  value: _propTypes2.default.string,
-	  withPortal: _propTypes2.default.bool
+	  weekLabel: _propTypes2.default.string,
+	  withPortal: _propTypes2.default.bool,
+	  yearDropdownItemNumber: _propTypes2.default.number
 	};
 	exports.default = DatePicker;
 
@@ -39256,15 +39266,16 @@
 	        dayNames.push(_react2.default.createElement(
 	          'div',
 	          { key: 'W', className: 'react-datepicker__day-name' },
-	          '#'
+	          _this.props.weekLabel || '#'
 	        ));
 	      }
 	      return dayNames.concat([0, 1, 2, 3, 4, 5, 6].map(function (offset) {
 	        var day = startOfWeek.clone().add(offset, 'days');
+	        var weekDayName = _this.props.useWeekdaysShort ? day.localeData().weekdaysShort(day) : day.localeData().weekdaysMin(day);
 	        return _react2.default.createElement(
 	          'div',
 	          { key: offset, className: 'react-datepicker__day-name' },
-	          day.localeData().weekdaysMin(day)
+	          weekDayName
 	        );
 	      }));
 	    };
@@ -39317,7 +39328,8 @@
 	        minDate: _this.props.minDate,
 	        maxDate: _this.props.maxDate,
 	        year: _this.state.date.year(),
-	        scrollableYearDropdown: _this.props.scrollableYearDropdown });
+	        scrollableYearDropdown: _this.props.scrollableYearDropdown,
+	        yearDropdownItemNumber: _this.props.yearDropdownItemNumber });
 	    };
 
 	    _this.renderMonthDropdown = function () {
@@ -39381,6 +39393,7 @@
 	            onDayClick: _this.handleDayClick,
 	            onDayMouseEnter: _this.handleDayMouseEnter,
 	            onMouseLeave: _this.handleMonthMouseLeave,
+	            formatWeekNumber: _this.props.formatWeekNumber,
 	            minDate: _this.props.minDate,
 	            maxDate: _this.props.maxDate,
 	            excludeDates: _this.props.excludeDates,
@@ -39453,6 +39466,7 @@
 	  excludeDates: _propTypes2.default.array,
 	  filterDate: _propTypes2.default.func,
 	  fixedHeight: _propTypes2.default.bool,
+	  formatWeekNumber: _propTypes2.default.func,
 	  highlightDates: _propTypes2.default.array,
 	  includeDates: _propTypes2.default.array,
 	  inline: _propTypes2.default.bool,
@@ -39477,7 +39491,10 @@
 	  showYearDropdown: _propTypes2.default.bool,
 	  startDate: _propTypes2.default.object,
 	  todayButton: _propTypes2.default.string,
-	  utcOffset: _propTypes2.default.number
+	  useWeekdaysShort: _propTypes2.default.bool,
+	  utcOffset: _propTypes2.default.number,
+	  weekLabel: _propTypes2.default.string,
+	  yearDropdownItemNumber: _propTypes2.default.number
 	};
 	exports.default = Calendar;
 
@@ -55393,7 +55410,8 @@
 	        year: _this.props.year,
 	        onChange: _this.onChange,
 	        onCancel: _this.toggleDropdown,
-	        scrollableYearDropdown: _this.props.scrollableYearDropdown });
+	        scrollableYearDropdown: _this.props.scrollableYearDropdown,
+	        yearDropdownItemNumber: _this.props.yearDropdownItemNumber });
 	    }, _this.renderScrollMode = function () {
 	      var dropdownVisible = _this.state.dropdownVisible;
 
@@ -55444,7 +55462,8 @@
 	  minDate: _propTypes2.default.object,
 	  onChange: _propTypes2.default.func.isRequired,
 	  scrollableYearDropdown: _propTypes2.default.bool,
-	  year: _propTypes2.default.number.isRequired
+	  year: _propTypes2.default.number.isRequired,
+	  yearDropdownItemNumber: _propTypes2.default.number
 	};
 	exports.default = YearDropdown;
 
@@ -55583,7 +55602,7 @@
 
 	function generateYears(year, noOfYear) {
 	  var list = [];
-	  for (var i = 0; i < 2 * noOfYear; i++) {
+	  for (var i = 0; i < 2 * noOfYear + 1; i++) {
 	    list.push(year + noOfYear - i);
 	  }
 	  return list;
@@ -55660,8 +55679,13 @@
 	      return _this.shiftYears(-1);
 	    };
 
+	    var yearDropdownItemNumber = props.yearDropdownItemNumber,
+	        scrollableYearDropdown = props.scrollableYearDropdown;
+
+	    var noOfYear = yearDropdownItemNumber || (scrollableYearDropdown ? 10 : 5);
+
 	    _this.state = {
-	      yearsList: _this.props.scrollableYearDropdown ? generateYears(_this.props.year, 10) : generateYears(_this.props.year, 5)
+	      yearsList: generateYears(_this.props.year, noOfYear)
 	    };
 	    return _this;
 	  }
@@ -55689,7 +55713,8 @@
 	  onCancel: _propTypes2.default.func.isRequired,
 	  onChange: _propTypes2.default.func.isRequired,
 	  scrollableYearDropdown: _propTypes2.default.bool,
-	  year: _propTypes2.default.number.isRequired
+	  year: _propTypes2.default.number.isRequired,
+	  yearDropdownItemNumber: _propTypes2.default.number
 	};
 	exports.default = YearDropdownOptions;
 
@@ -56420,6 +56445,7 @@
 	          month: _this.props.day.month(),
 	          onDayClick: _this.handleDayClick,
 	          onDayMouseEnter: _this.handleDayMouseEnter,
+	          formatWeekNumber: _this.props.formatWeekNumber,
 	          minDate: _this.props.minDate,
 	          maxDate: _this.props.maxDate,
 	          excludeDates: _this.props.excludeDates,
@@ -56491,6 +56517,7 @@
 	  excludeDates: _propTypes2.default.array,
 	  filterDate: _propTypes2.default.func,
 	  fixedHeight: _propTypes2.default.bool,
+	  formatWeekNumber: _propTypes2.default.func,
 	  highlightDates: _propTypes2.default.array,
 	  includeDates: _propTypes2.default.array,
 	  inline: _propTypes2.default.bool,
@@ -56569,11 +56596,16 @@
 	      if (_this.props.onDayMouseEnter) {
 	        _this.props.onDayMouseEnter(day);
 	      }
+	    }, _this.formatWeekNumber = function (startOfWeek) {
+	      if (_this.props.formatWeekNumber) {
+	        return _this.props.formatWeekNumber(startOfWeek);
+	      }
+	      return parseInt(startOfWeek.format('w'), 10);
 	    }, _this.renderDays = function () {
 	      var startOfWeek = _this.props.day.clone().startOf('week');
 	      var days = [];
 	      if (_this.props.showWeekNumber) {
-	        days.push(_react2.default.createElement(_week_number2.default, { key: 'W', weekNumber: parseInt(startOfWeek.format('w'), 10) }));
+	        days.push(_react2.default.createElement(_week_number2.default, { key: 'W', weekNumber: _this.formatWeekNumber(startOfWeek) }));
 	      }
 	      return days.concat([0, 1, 2, 3, 4, 5, 6].map(function (offset) {
 	        var day = startOfWeek.clone().add(offset, 'days');
@@ -56623,6 +56655,7 @@
 	  endDate: _propTypes2.default.object,
 	  excludeDates: _propTypes2.default.array,
 	  filterDate: _propTypes2.default.func,
+	  formatWeekNumber: _propTypes2.default.func,
 	  highlightDates: _propTypes2.default.array,
 	  includeDates: _propTypes2.default.array,
 	  inline: _propTypes2.default.bool,
@@ -62087,7 +62120,7 @@
 	          _react2.default.createElement(
 	            'code',
 	            { className: 'jsx' },
-	            '\n<DatePicker\n    selected={this.state.startDate}\n    onChange={this.handleChange}\n    showYearDropdown\n    dateFormatCalendar="MMMM"\n    scrollableYearDropdown\n/>\n'
+	            '\n        <DatePicker\n            selected={this.state.startDate}\n            onChange={this.handleChange}\n            showYearDropdown\n            dateFormatCalendar="MMMM"\n            scrollableYearDropdown\n            yearDropdownItemNumber={15}\n        />\n        '
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -62098,6 +62131,7 @@
 	            onChange: this.handleChange,
 	            showYearDropdown: true,
 	            dateFormatCalendar: 'MMMM',
+	            yearDropdownItemNumber: 15,
 	            scrollableYearDropdown: true })
 	        )
 	      );
@@ -62380,10 +62414,6 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _moment = __webpack_require__(354);
-
-	var _moment2 = _interopRequireDefault(_moment);
-
 	var _reactDatepicker = __webpack_require__(352);
 
 	var _reactDatepicker2 = _interopRequireDefault(_reactDatepicker);
@@ -62457,8 +62487,6 @@
 	            dateFormat: 'DD-MMM YYYY HH:mm',
 	            todayButton: todayTxt,
 	            selected: selected,
-	            minDate: (0, _moment2.default)('2016-11-05T00:00:00+00:00').utcOffset(this.state.utcOffset),
-	            maxDate: (0, _moment2.default)('2016-12-04T00:00:00-04:00').utcOffset(this.state.utcOffset),
 	            onChange: this.handleChange }),
 	          _react2.default.createElement('br', null),
 	          _react2.default.createElement(
