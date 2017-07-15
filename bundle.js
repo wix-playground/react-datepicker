@@ -38662,6 +38662,7 @@
 	        dropdownMode: 'scroll',
 	        onFocus: function onFocus() {},
 	        onBlur: function onBlur() {},
+	        onKeyDown: function onKeyDown() {},
 	        onSelect: function onSelect() {},
 	        onClickOutside: function onClickOutside() {},
 	        onMonthChange: function onMonthChange() {},
@@ -38679,7 +38680,7 @@
 	    var _this = _possibleConstructorReturn(this, (DatePicker.__proto__ || Object.getPrototypeOf(DatePicker)).call(this, props));
 
 	    _this.calcInitialState = function () {
-	      var defaultPreSelection = _this.props.openToDate ? (0, _moment2.default)(_this.props.openToDate) : _this.props.selectsEnd && _this.props.startDate ? (0, _moment2.default)(_this.props.startDate) : _this.props.selectsStart && _this.props.endDate ? (0, _moment2.default)(_this.props.endDate) : _this.props.utcOffset ? _moment2.default.utc().utcOffset(_this.props.utcOffset) : (0, _moment2.default)();
+	      var defaultPreSelection = _this.props.openToDate ? (0, _moment2.default)(_this.props.openToDate) : _this.props.selectsEnd && _this.props.startDate ? (0, _moment2.default)(_this.props.startDate) : _this.props.selectsStart && _this.props.endDate ? (0, _moment2.default)(_this.props.endDate) : typeof _this.props.utcOffset !== 'undefined' ? _moment2.default.utc().utcOffset(_this.props.utcOffset) : (0, _moment2.default)();
 	      var minDate = (0, _date_utils.getEffectiveMinDate)(_this.props);
 	      var maxDate = (0, _date_utils.getEffectiveMaxDate)(_this.props);
 	      var boundedPreSelection = minDate && defaultPreSelection.isBefore(minDate) ? minDate : maxDate && defaultPreSelection.isAfter(maxDate) ? maxDate : defaultPreSelection;
@@ -38823,6 +38824,7 @@
 	    };
 
 	    _this.onInputKeyDown = function (event) {
+	      _this.props.onKeyDown(event);
 	      var eventKey = event.key;
 	      if (!_this.state.open && !_this.props.inline) {
 	        if (eventKey !== 'Enter' && eventKey !== 'Escape' && eventKey !== 'Tab') {
@@ -38833,7 +38835,11 @@
 	      var copy = (0, _moment2.default)(_this.state.preSelection);
 	      if (eventKey === 'Enter') {
 	        event.preventDefault();
-	        _this.handleSelect(copy, event);
+	        if (_moment2.default.isMoment(_this.state.preSelection) || _moment2.default.isDate(_this.state.preSelection)) {
+	          _this.handleSelect(copy, event);
+	        } else {
+	          _this.setOpen(false);
+	        }
 	      } else if (eventKey === 'Escape') {
 	        event.preventDefault();
 	        _this.setOpen(false);
@@ -38900,6 +38906,7 @@
 	          selected: _this.props.selected,
 	          preSelection: _this.state.preSelection,
 	          onSelect: _this.handleSelect,
+	          onWeekSelect: _this.props.onWeekSelect,
 	          openToDate: _this.props.openToDate,
 	          minDate: _this.props.minDate,
 	          maxDate: _this.props.maxDate,
@@ -39058,9 +39065,11 @@
 	  onBlur: _propTypes2.default.func,
 	  onChange: _propTypes2.default.func.isRequired,
 	  onSelect: _propTypes2.default.func,
+	  onWeekSelect: _propTypes2.default.func,
 	  onClickOutside: _propTypes2.default.func,
 	  onChangeRaw: _propTypes2.default.func,
 	  onFocus: _propTypes2.default.func,
+	  onKeyDown: _propTypes2.default.func,
 	  onMonthChange: _propTypes2.default.func,
 	  openToDate: _propTypes2.default.object,
 	  peekNextMonth: _propTypes2.default.bool,
@@ -39393,6 +39402,7 @@
 	            onDayClick: _this.handleDayClick,
 	            onDayMouseEnter: _this.handleDayMouseEnter,
 	            onMouseLeave: _this.handleMonthMouseLeave,
+	            onWeekSelect: _this.props.onWeekSelect,
 	            formatWeekNumber: _this.props.formatWeekNumber,
 	            minDate: _this.props.minDate,
 	            maxDate: _this.props.maxDate,
@@ -39479,6 +39489,7 @@
 	  forceShowMonthNavigation: _propTypes2.default.bool,
 	  onDropdownFocus: _propTypes2.default.func,
 	  onSelect: _propTypes2.default.func.isRequired,
+	  onWeekSelect: _propTypes2.default.func,
 	  openToDate: _propTypes2.default.object,
 	  peekNextMonth: _propTypes2.default.bool,
 	  scrollableYearDropdown: _propTypes2.default.bool,
@@ -56445,6 +56456,7 @@
 	          month: _this.props.day.month(),
 	          onDayClick: _this.handleDayClick,
 	          onDayMouseEnter: _this.handleDayMouseEnter,
+	          onWeekSelect: _this.props.onWeekSelect,
 	          formatWeekNumber: _this.props.formatWeekNumber,
 	          minDate: _this.props.minDate,
 	          maxDate: _this.props.maxDate,
@@ -56526,6 +56538,7 @@
 	  onDayClick: _propTypes2.default.func,
 	  onDayMouseEnter: _propTypes2.default.func,
 	  onMouseLeave: _propTypes2.default.func,
+	  onWeekSelect: _propTypes2.default.func,
 	  peekNextMonth: _propTypes2.default.bool,
 	  preSelection: _propTypes2.default.object,
 	  selected: _propTypes2.default.object,
@@ -56596,6 +56609,10 @@
 	      if (_this.props.onDayMouseEnter) {
 	        _this.props.onDayMouseEnter(day);
 	      }
+	    }, _this.handleWeekClick = function (day, weekNumber, event) {
+	      if (typeof _this.props.onWeekSelect === 'function') {
+	        _this.props.onWeekSelect(day, weekNumber, event);
+	      }
 	    }, _this.formatWeekNumber = function (startOfWeek) {
 	      if (_this.props.formatWeekNumber) {
 	        return _this.props.formatWeekNumber(startOfWeek);
@@ -56604,8 +56621,10 @@
 	    }, _this.renderDays = function () {
 	      var startOfWeek = _this.props.day.clone().startOf('week');
 	      var days = [];
+	      var weekNumber = _this.formatWeekNumber(startOfWeek);
 	      if (_this.props.showWeekNumber) {
-	        days.push(_react2.default.createElement(_week_number2.default, { key: 'W', weekNumber: _this.formatWeekNumber(startOfWeek) }));
+	        var onClickAction = _this.props.onWeekSelect ? _this.handleWeekClick.bind(_this, startOfWeek, weekNumber) : undefined;
+	        days.push(_react2.default.createElement(_week_number2.default, { key: 'W', weekNumber: weekNumber, onClick: onClickAction }));
 	      }
 	      return days.concat([0, 1, 2, 3, 4, 5, 6].map(function (offset) {
 	        var day = startOfWeek.clone().add(offset, 'days');
@@ -56664,6 +56683,7 @@
 	  month: _propTypes2.default.number,
 	  onDayClick: _propTypes2.default.func,
 	  onDayMouseEnter: _propTypes2.default.func,
+	  onWeekSelect: _propTypes2.default.func,
 	  preSelection: _propTypes2.default.object,
 	  selected: _propTypes2.default.object,
 	  selectingDate: _propTypes2.default.object,
@@ -56865,7 +56885,7 @@
 	      return _this.props.month !== undefined && _this.props.month !== _this.props.day.month();
 	    }, _this.getClassNames = function (date) {
 	      var dayClassName = _this.props.dayClassName ? _this.props.dayClassName(date) : undefined;
-	      return (0, _classnames2.default)('react-datepicker__day', dayClassName, {
+	      return (0, _classnames2.default)('react-datepicker__day', dayClassName, 'react-datepicker__day--' + (0, _date_utils.getDayOfWeekCode)(_this.props.day), {
 	        'react-datepicker__day--disabled': _this.isDisabled(),
 	        'react-datepicker__day--selected': _this.isSameDay(_this.props.selected),
 	        'react-datepicker__day--keyboard-selected': _this.isKeyboardSelected(),
@@ -56942,6 +56962,7 @@
 	exports.getEffectiveMaxDate = getEffectiveMaxDate;
 	exports.parseDate = parseDate;
 	exports.safeDateFormat = safeDateFormat;
+	exports.getDayOfWeekCode = getDayOfWeekCode;
 
 	var _moment = __webpack_require__(354);
 
@@ -57053,6 +57074,20 @@
 	  return date && date.clone().locale(locale || _moment2.default.locale()).format(Array.isArray(dateFormat) ? dateFormat[0] : dateFormat) || '';
 	}
 
+	var dayOfWeekCodes = {
+	  1: 'mon',
+	  2: 'tue',
+	  3: 'wed',
+	  4: 'thu',
+	  5: 'fri',
+	  6: 'sat',
+	  7: 'sun'
+	};
+
+	function getDayOfWeekCode(day) {
+	  return dayOfWeekCodes[day.isoWeekday()];
+	}
+
 /***/ }),
 /* 485 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -57073,6 +57108,10 @@
 
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 
+	var _classnames = __webpack_require__(476);
+
+	var _classnames2 = _interopRequireDefault(_classnames);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -57085,19 +57124,36 @@
 	  _inherits(WeekNumber, _React$Component);
 
 	  function WeekNumber() {
+	    var _ref;
+
+	    var _temp, _this, _ret;
+
 	    _classCallCheck(this, WeekNumber);
 
-	    return _possibleConstructorReturn(this, (WeekNumber.__proto__ || Object.getPrototypeOf(WeekNumber)).apply(this, arguments));
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+
+	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = WeekNumber.__proto__ || Object.getPrototypeOf(WeekNumber)).call.apply(_ref, [this].concat(args))), _this), _this.handleClick = function (event) {
+	      if (_this.props.onClick) {
+	        _this.props.onClick(event);
+	      }
+	    }, _temp), _possibleConstructorReturn(_this, _ret);
 	  }
 
 	  _createClass(WeekNumber, [{
 	    key: 'render',
 	    value: function render() {
+	      var weekNumberClasses = {
+	        'react-datepicker__week-number': true,
+	        'react-datepicker__week-number--clickable': !!this.props.onClick
+	      };
 	      return _react2.default.createElement(
 	        'div',
 	        {
-	          className: 'react-datepicker__week-number',
-	          'aria-label': 'week-' + this.props.weekNumber },
+	          className: (0, _classnames2.default)(weekNumberClasses),
+	          'aria-label': 'week-' + this.props.weekNumber,
+	          onClick: this.handleClick },
 	        this.props.weekNumber
 	      );
 	    }
@@ -57107,7 +57163,8 @@
 	}(_react2.default.Component);
 
 	WeekNumber.propTypes = {
-	  weekNumber: _propTypes2.default.number.isRequired
+	  weekNumber: _propTypes2.default.number.isRequired,
+	  onClick: _propTypes2.default.func
 	};
 	exports.default = WeekNumber;
 
@@ -57169,17 +57226,15 @@
 	        null,
 	        _react2.default.createElement(
 	          _reactPopper.Target,
-	          {
-	            style: { display: 'inline-block' } },
+	          { className: 'react-datepicker-wrapper' },
 	          targetComponent
 	        ),
 	        !hidePopper && _react2.default.createElement(
 	          _reactPopper.Popper,
 	          {
-	            style: { zIndex: 1 },
+	            className: 'react-datepicker-popper',
 	            modifiers: popperModifiers,
-	            placement: popperPlacement,
-	            className: 'popper' },
+	            placement: popperPlacement },
 	          popperComponent
 	        )
 	      );
