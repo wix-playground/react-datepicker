@@ -1116,7 +1116,7 @@
 
 /***/ }),
 /* 15 */
-[534, 6],
+[535, 6],
 /* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5936,7 +5936,7 @@
 
 /***/ }),
 /* 50 */
-[534, 35],
+[535, 35],
 /* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20468,7 +20468,7 @@
 
 	var _example_components2 = _interopRequireDefault(_example_components);
 
-	var _hero_example = __webpack_require__(533);
+	var _hero_example = __webpack_require__(534);
 
 	var _hero_example2 = _interopRequireDefault(_hero_example);
 
@@ -20767,9 +20767,13 @@
 
 	var _raw_change2 = _interopRequireDefault(_raw_change);
 
-	__webpack_require__(531);
+	var _dont_close_onSelect = __webpack_require__(531);
+
+	var _dont_close_onSelect2 = _interopRequireDefault(_dont_close_onSelect);
 
 	__webpack_require__(532);
+
+	__webpack_require__(533);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20901,6 +20905,9 @@
 	    }, {
 	      title: 'Get raw input value on change',
 	      component: _react2.default.createElement(_raw_change2.default, null)
+	    }, {
+	      title: 'Don\'t hide calendar on date selection',
+	      component: _react2.default.createElement(_dont_close_onSelect2.default, null)
 	    }], _this.renderExamples = function () {
 	      return _this.examples.map(function (example, index) {
 	        return _react2.default.createElement(
@@ -38669,7 +38676,8 @@
 
 	        utcOffset: (0, _moment2.default)().utcOffset(),
 	        monthsShown: 1,
-	        withPortal: false
+	        withPortal: false,
+	        shouldCloseOnSelect: true
 	      };
 	    }
 	  }]);
@@ -38741,7 +38749,9 @@
 	    };
 
 	    _this.handleCalendarClickOutside = function (event) {
-	      _this.setOpen(false);
+	      if (!_this.props.inline) {
+	        _this.setOpen(false);
+	      }
 	      _this.props.onClickOutside(event);
 	      if (_this.props.withPortal) {
 	        event.preventDefault();
@@ -38772,7 +38782,9 @@
 	        return _this.preventFocusTimeout;
 	      });
 	      _this.setSelected(date, event);
-	      if (!_this.props.inline) {
+	      if (!_this.props.shouldCloseOnSelect) {
+	        _this.setPreSelection(date);
+	      } else if (!_this.props.inline) {
 	        _this.setOpen(false);
 	      }
 	    };
@@ -38837,6 +38849,7 @@
 	        event.preventDefault();
 	        if (_moment2.default.isMoment(_this.state.preSelection) || _moment2.default.isDate(_this.state.preSelection)) {
 	          _this.handleSelect(copy, event);
+	          !_this.props.shouldCloseOnSelect && _this.setPreSelection(copy);
 	        } else {
 	          _this.setOpen(false);
 	        }
@@ -38845,8 +38858,7 @@
 	        _this.setOpen(false);
 	      } else if (eventKey === 'Tab') {
 	        _this.setOpen(false);
-	      }
-	      if (!_this.props.disabledKeyboardNavigation) {
+	      } else if (!_this.props.disabledKeyboardNavigation) {
 	        var newSelection = void 0;
 	        switch (eventKey) {
 	          case 'ArrowLeft':
@@ -38983,6 +38995,15 @@
 	  }
 
 	  _createClass(DatePicker, [{
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps) {
+	      var currentMonth = this.props.selected && this.props.selected.month();
+	      var nextMonth = nextProps.selected && nextProps.selected.month();
+	      if (this.props.inline && currentMonth !== nextMonth) {
+	        this.setPreSelection(nextProps.selected);
+	      }
+	    }
+	  }, {
 	    key: 'componentWillUnmount',
 	    value: function componentWillUnmount() {
 	      this.clearPreventFocusTimeout();
@@ -39096,7 +39117,8 @@
 	  value: _propTypes2.default.string,
 	  weekLabel: _propTypes2.default.string,
 	  withPortal: _propTypes2.default.bool,
-	  yearDropdownItemNumber: _propTypes2.default.number
+	  yearDropdownItemNumber: _propTypes2.default.number,
+	  shouldCloseOnSelect: _propTypes2.default.bool
 	};
 	exports.default = DatePicker;
 
@@ -56770,14 +56792,17 @@
 	          day = _this$props.day,
 	          highlightDates = _this$props.highlightDates;
 
+
 	      if (!highlightDates) {
 	        return _defineProperty({}, defaultClassName, false);
 	      }
+
+	      var classNames = {};
 	      for (var i = 0, len = highlightDates.length; i < len; i++) {
 	        var obj = highlightDates[i];
 	        if (obj instanceof _moment2.default) {
 	          if ((0, _date_utils.isSameDay)(day, obj)) {
-	            return _defineProperty({}, defaultClassName, true);
+	            classNames[defaultClassName] = true;
 	          }
 	        } else if ((typeof obj === 'undefined' ? 'undefined' : _typeof(obj)) === 'object') {
 	          var keys = Object.keys(obj);
@@ -56785,12 +56810,14 @@
 	          if (typeof keys[0] === 'string' && arr.constructor === Array) {
 	            for (var k = 0, _len2 = arr.length; k < _len2; k++) {
 	              if ((0, _date_utils.isSameDay)(day, arr[k])) {
-	                return _defineProperty({}, keys[0], true);
+	                classNames[keys[0]] = true;
 	              }
 	            }
 	          }
 	        }
 	      }
+
+	      return classNames;
 	    }, _this.isInRange = function () {
 	      var _this$props2 = _this.props,
 	          day = _this$props2.day,
@@ -63608,14 +63635,98 @@
 
 /***/ }),
 /* 531 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDatepicker = __webpack_require__(352);
+
+	var _reactDatepicker2 = _interopRequireDefault(_reactDatepicker);
+
+	var _moment = __webpack_require__(354);
+
+	var _moment2 = _interopRequireDefault(_moment);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var DontCloseOnSelect = function (_React$Component) {
+	  _inherits(DontCloseOnSelect, _React$Component);
+
+	  function DontCloseOnSelect(props) {
+	    _classCallCheck(this, DontCloseOnSelect);
+
+	    var _this = _possibleConstructorReturn(this, (DontCloseOnSelect.__proto__ || Object.getPrototypeOf(DontCloseOnSelect)).call(this, props));
+
+	    _this.handleChange = function (date) {
+	      _this.setState({
+	        startDate: date
+	      });
+	    };
+
+	    _this.state = {
+	      startDate: (0, _moment2.default)()
+	    };
+	    return _this;
+	  }
+
+	  _createClass(DontCloseOnSelect, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'row' },
+	        _react2.default.createElement(
+	          'pre',
+	          { className: 'column example__code' },
+	          _react2.default.createElement(
+	            'code',
+	            { className: 'jsx' },
+	            '\n<DatePicker\n    selected={this.state.startDate}\n    onChange={this.handleChange}\n    shouldCloseOnSelect={false}\n/>\n'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'column' },
+	          _react2.default.createElement(_reactDatepicker2.default, {
+	            selected: this.state.startDate,
+	            onChange: this.handleChange,
+	            shouldCloseOnSelect: false })
+	        )
+	      );
+	    }
+	  }]);
+
+	  return DontCloseOnSelect;
+	}(_react2.default.Component);
+
+	exports.default = DontCloseOnSelect;
+
+/***/ }),
+/* 532 */
 /***/ (function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 532 */
-531,
 /* 533 */
+532,
+/* 534 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -63682,7 +63793,7 @@
 	exports.default = HeroExample;
 
 /***/ }),
-/* 534 */
+/* 535 */
 /***/ (function(module, exports, __webpack_require__, __webpack_module_template_argument_0__) {
 
 	/**
